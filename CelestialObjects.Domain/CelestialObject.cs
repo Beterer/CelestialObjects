@@ -8,7 +8,7 @@ namespace CelestialObjects.Domain
 
         public string Name { get; set; }
 
-        public decimal Mass { get; set; }
+        public double Mass { get; set; }
 
         public double EquatorialDiameter { get; set; }
 
@@ -17,6 +17,8 @@ namespace CelestialObjects.Domain
         public DateTime DiscoveryDate { get; set; }
 
         public DiscoverySource DiscoverySource { get; set; }
+
+        public int DiscoverySourceId { get; set; }
 
         public CelestialObjectType Type { get; set; }
     }

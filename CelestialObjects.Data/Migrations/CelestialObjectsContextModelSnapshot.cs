@@ -29,14 +29,14 @@ namespace CelestialObjects.Data.Migrations
                     b.Property<DateTime>("DiscoveryDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DiscoverySourceId")
+                    b.Property<int>("DiscoverySourceId")
                         .HasColumnType("int");
 
                     b.Property<double>("EquatorialDiameter")
                         .HasColumnType("float");
 
-                    b.Property<decimal>("Mass")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Mass")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -82,7 +82,9 @@ namespace CelestialObjects.Data.Migrations
                 {
                     b.HasOne("CelestialObjects.Domain.DiscoverySource", "DiscoverySource")
                         .WithMany()
-                        .HasForeignKey("DiscoverySourceId");
+                        .HasForeignKey("DiscoverySourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DiscoverySource");
                 });

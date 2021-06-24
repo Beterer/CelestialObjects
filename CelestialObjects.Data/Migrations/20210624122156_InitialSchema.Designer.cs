@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CelestialObjects.Data.Migrations
 {
     [DbContext(typeof(CelestialObjectsContext))]
-    [Migration("20210622133645_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210624122156_InitialSchema")]
+    partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,14 +31,14 @@ namespace CelestialObjects.Data.Migrations
                     b.Property<DateTime>("DiscoveryDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DiscoverySourceId")
+                    b.Property<int>("DiscoverySourceId")
                         .HasColumnType("int");
 
                     b.Property<double>("EquatorialDiameter")
                         .HasColumnType("float");
 
-                    b.Property<decimal>("Mass")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Mass")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -84,7 +84,9 @@ namespace CelestialObjects.Data.Migrations
                 {
                     b.HasOne("CelestialObjects.Domain.DiscoverySource", "DiscoverySource")
                         .WithMany()
-                        .HasForeignKey("DiscoverySourceId");
+                        .HasForeignKey("DiscoverySourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DiscoverySource");
                 });

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CelestialObjects.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,11 +30,11 @@ namespace CelestialObjects.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Mass = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Mass = table.Column<double>(type: "float", nullable: false),
                     EquatorialDiameter = table.Column<double>(type: "float", nullable: false),
                     SurfaceTemperature = table.Column<double>(type: "float", nullable: false),
                     DiscoveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DiscoverySourceId = table.Column<int>(type: "int", nullable: true),
+                    DiscoverySourceId = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -45,7 +45,7 @@ namespace CelestialObjects.Data.Migrations
                         column: x => x.DiscoverySourceId,
                         principalTable: "DiscoverySources",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
