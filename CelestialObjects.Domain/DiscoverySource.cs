@@ -10,7 +10,9 @@ namespace CelestialObjects.Domain
 
         public DateTime EstablishmentDate { get; set; }
 
-        public DiscoverySourceType Type { get; set; }
+        public virtual DiscoverySourceType Type { get; set; }
+
+        public int TypeId { get; set; }
 
         public string StateOwner { get; set; }
     }

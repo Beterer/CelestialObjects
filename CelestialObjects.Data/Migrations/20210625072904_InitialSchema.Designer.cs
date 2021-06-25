@@ -4,14 +4,16 @@ using CelestialObjects.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CelestialObjects.Data.Migrations
 {
     [DbContext(typeof(CelestialObjectsContext))]
-    partial class CelestialObjectsContextModelSnapshot : ModelSnapshot
+    [Migration("20210625072904_InitialSchema")]
+    partial class InitialSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

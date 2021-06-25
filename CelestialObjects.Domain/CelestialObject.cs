@@ -20,6 +20,8 @@ namespace CelestialObjects.Domain
 
         public int DiscoverySourceId { get; set; }
 
-        public CelestialObjectType Type { get; set; }
+        public virtual CelestialObjectType Type { get; set; }
+        
+        public int TypeId { get; set; }
     }
 }

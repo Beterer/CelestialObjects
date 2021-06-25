@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CelestialObjects.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace CelestialObjects.Data
 {
@@ -9,15 +10,51 @@ namespace CelestialObjects.Data
         {
         }
 
-        public DbSet<Domain.CelestialObject> CelestialObjects { get; set; }
+        public DbSet<CelestialObject> CelestialObjects { get; set; }
 
-        public DbSet<Domain.DiscoverySource> DiscoverySources { get; set; }
+        public DbSet<DiscoverySource> DiscoverySources { get; set; }
+
+        public DbSet<CelestialObjectType> CelestialObjectTypes { get; set; }
+
+        public DbSet<DiscoverySourceType> DiscoverySourceTypes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var celestialObjects = new Domain.CelestialObject[]
+            modelBuilder.Entity<CelestialObjectType>().HasData(
+                CelestialObjectTypeEnum.Planet, CelestialObjectTypeEnum.Star, CelestialObjectTypeEnum.BlackHole);
+            modelBuilder.Entity<DiscoverySourceType>().HasData(
+               DiscoverySourceTypeEnum.GroundTelescope, DiscoverySourceTypeEnum.SpaceTelescope, DiscoverySourceTypeEnum.Other);
+
+            SeedData(modelBuilder);
+        }
+
+        private void SeedData(ModelBuilder modelBuilder)
+        {
+            var discoverySources = new DiscoverySource[]
+                        {
+                new DiscoverySource
+                {
+                    Id = 1,
+                    Name = "Hubble Space Telescope",
+                    EstablishmentDate = new System.DateTime(2019, 3, 10),
+                    StateOwner = "USA",
+                    TypeId = 1
+                },
+                new DiscoverySource
+                {
+                    Id = 2,
+                    Name = "Arecibo Observatory",
+                    EstablishmentDate = new System.DateTime(2019, 3, 10),
+                    StateOwner = "Puerto Rico",
+                    TypeId = 2
+                }
+                        };
+            modelBuilder.Entity<DiscoverySource>().HasData(discoverySources);
+
+            var celestialObjects = new CelestialObject[]
             {
-                new Domain.CelestialObject
+                new CelestialObject
                 {
                     Id = 1,
                     Name = "Kepler-37b",
@@ -26,9 +63,9 @@ namespace CelestialObjects.Data
                     SurfaceTemperature = 5800,
                     DiscoveryDate = new System.DateTime(2018, 12, 15),
                     DiscoverySourceId = 1,
-                    Type = Domain.CelestialObjectType.Planet
+                    TypeId = 1
                 },
-                new Domain.CelestialObject
+                new CelestialObject
                 {
                     Id = 2,
                     Name = "X1 NGC 4889",
@@ -37,40 +74,23 @@ namespace CelestialObjects.Data
                     SurfaceTemperature = 2000,
                     DiscoveryDate = new System.DateTime(2019, 3, 10),
                     DiscoverySourceId = 1,
-                    Type = Domain.CelestialObjectType.BlackHole
+                    TypeId = 3
                 },
-                new Domain.CelestialObject
+                new CelestialObject
                 {
-                    Id = 2,
+                    Id = 3,
                     Name = "V538 Carinae",
                     Mass = 3.65e29,
                     EquatorialDiameter = 184502000,
                     SurfaceTemperature = 4800,
                     DiscoveryDate = new System.DateTime(2010, 1, 25),
                     DiscoverySourceId = 2,
-                    Type = Domain.CelestialObjectType.Star
+                    TypeId = 2
                 }
             };
+            modelBuilder.Entity<CelestialObject>().HasData(celestialObjects);
 
-            var discoverySources = new Domain.DiscoverySource[]
-            {
-                new Domain.DiscoverySource
-                {
-                    Id = 1,
-                    Name = "Hubble Space Telescope",
-                    EstablishmentDate = new System.DateTime(2019, 3, 10),
-                    StateOwner = "USA",
-                    Type = Domain.DiscoverySourceType.SpaceTelescope
-                },
-                new Domain.DiscoverySource
-                {
-                    Id = 2,
-                    Name = "Arecibo Observatory",
-                    EstablishmentDate = new System.DateTime(2019, 3, 10),
-                    StateOwner = "Puerto Rico",
-                    Type = Domain.DiscoverySourceType.GroundTelescope
-                }
-            };
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
