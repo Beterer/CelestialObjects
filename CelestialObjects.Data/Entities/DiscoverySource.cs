@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CelestialObjects.Domain
+namespace CelestialObjects.Data.Entities
 {
     public class DiscoverySource
     {

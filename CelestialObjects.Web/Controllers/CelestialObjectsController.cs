@@ -1,6 +1,8 @@
-﻿using CelestialObjects.Data;
+﻿using CelestialObjects.Data.Contexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using CelestialObjects.Data.Services;
 
 namespace CelestialObjects.Web.Controllers
 {
@@ -10,18 +12,22 @@ namespace CelestialObjects.Web.Controllers
     {
         private readonly ILogger<CelestialObjectsController> _logger;
         private readonly CelestialObjectsContext _celestialObjectsContext;
-
-        public CelestialObjectsController(ILogger<CelestialObjectsController> logger, CelestialObjectsContext celestialObjectsContext)
+        private readonly ICelestialObjectsRepository _celestialObjectsRepository;
+                
+        public CelestialObjectsController(ILogger<CelestialObjectsController> logger,
+            CelestialObjectsContext celestialObjectsContext, 
+            ICelestialObjectsRepository celestialObjectsRepository)
         {
             _logger = logger;
             _celestialObjectsContext = celestialObjectsContext;
+            _celestialObjectsRepository = celestialObjectsRepository;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            _celestialObjectsContext.Add(new object()); ;
-            return Ok();
+            var celestialObjects = await _celestialObjectsRepository.GetCelestialObjectsAsync();
+            return Ok(celestialObjects);
         }
     }
 }

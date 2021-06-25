@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CelestialObjects.Domain
+namespace CelestialObjects.Data.Entities
 {
     public class CelestialObjectType
     {

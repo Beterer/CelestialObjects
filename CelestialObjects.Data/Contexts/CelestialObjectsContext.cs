@@ -1,10 +1,10 @@
-﻿using CelestialObjects.Domain;
+﻿using CelestialObjects.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CelestialObjects.Data
+namespace CelestialObjects.Data.Contexts
 {
     public class CelestialObjectsContext : DbContext
-    {       
+    {
         public CelestialObjectsContext(DbContextOptions<CelestialObjectsContext> options)
             : base(options)
         {
@@ -21,18 +21,18 @@ namespace CelestialObjects.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CelestialObjectType>().HasData(
-                CelestialObjectTypeEnum.Planet, CelestialObjectTypeEnum.Star, CelestialObjectTypeEnum.BlackHole);
-            modelBuilder.Entity<DiscoverySourceType>().HasData(
-               DiscoverySourceTypeEnum.GroundTelescope, DiscoverySourceTypeEnum.SpaceTelescope, DiscoverySourceTypeEnum.Other);
-
             SeedData(modelBuilder);
         }
 
         private void SeedData(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CelestialObjectType>().HasData(
+                CelestialObjectTypeEnum.Planet, CelestialObjectTypeEnum.Star, CelestialObjectTypeEnum.BlackHole);
+            modelBuilder.Entity<DiscoverySourceType>().HasData(
+               DiscoverySourceTypeEnum.GroundTelescope, DiscoverySourceTypeEnum.SpaceTelescope, DiscoverySourceTypeEnum.Other);
+
             var discoverySources = new DiscoverySource[]
-                        {
+            {
                 new DiscoverySource
                 {
                     Id = 1,
@@ -49,7 +49,7 @@ namespace CelestialObjects.Data
                     StateOwner = "Puerto Rico",
                     TypeId = 2
                 }
-                        };
+            };
             modelBuilder.Entity<DiscoverySource>().HasData(discoverySources);
 
             var celestialObjects = new CelestialObject[]

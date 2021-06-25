@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 
-namespace CelestialObjects.Domain
+namespace CelestialObjects.Data
 {
     public static class Extensions
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CelestialObjects.Domain
+namespace CelestialObjects.Data.Entities
 {
     public enum CelestialObjectTypeEnum
     {
