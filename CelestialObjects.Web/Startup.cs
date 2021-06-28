@@ -1,6 +1,8 @@
 using CelestialObjects.Data.Contexts;
 using CelestialObjects.Data.Repositories;
+using CelestialObjects.Web.GraphQL;
 using CelestialObjects.Web.Services;
+using GraphQL.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using GraphQL.Types;
 
 namespace CelestialObjects.Web
 {
@@ -33,6 +36,16 @@ namespace CelestialObjects.Web
 
             services.AddTransient<ICelestialObjectsRepository, CelestialObjectsRepository>();
             services.AddTransient<ICelestialObjectsService, CelestialObjectsService>();
+
+            services.AddScoped<ISchema, CelestialObjectsSchema>();
+
+            services.AddGraphQL(options =>
+            {
+                options.EnableMetrics = true;
+            })
+            .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
+            .AddSystemTextJson()
+            .AddGraphTypes(ServiceLifetime.Scoped);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +68,9 @@ namespace CelestialObjects.Web
             {
                 endpoints.MapControllers();
             });
+
+            app.UseGraphQL<ISchema>();
+            app.UseGraphQLPlayground();
         }
     }
 }
