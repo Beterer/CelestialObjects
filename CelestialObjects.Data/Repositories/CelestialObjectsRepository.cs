@@ -16,23 +16,23 @@ namespace CelestialObjects.Data.Repositories
             this._celestialObjectsContext = celestialObjectsContext;
         }
 
-        public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsAsync()
+        public async Task<IEnumerable<CelestialObject>> GetAllAsync()
         {
             return await InitBaseGetQuery().ToListAsync();
         }
 
-        public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsByTypeAsync(int typeId)
+        public async Task<IEnumerable<CelestialObject>> GetByTypeAsync(int typeId)
         {
             return await InitBaseGetQuery().
                 Where(x => x.TypeId == typeId).ToListAsync();
         }
 
-        public async Task<CelestialObject> GetCelestialObjectsByNameAsync(string name)
+        public async Task<CelestialObject> GetByNameAsync(string name)
         {
             return await _celestialObjectsContext.CelestialObjects.SingleOrDefaultAsync(x => x.Name == name);
         }
 
-        public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsByCountryDiscoveredAsync(string countryName)
+        public async Task<IEnumerable<CelestialObject>> GetByCountryDiscoveredAsync(string countryName)
         {
             return await InitBaseGetQuery().
                 Where(x => x.DiscoverySource.StateOwner == countryName).ToListAsync();
@@ -43,9 +43,14 @@ namespace CelestialObjects.Data.Repositories
             return await _celestialObjectsContext.CelestialObjectTypes.ToListAsync();
         }
 
+        public async Task<CelestialObjectType> GetTypeByIdAsync(int typeId)
+        {
+            return await _celestialObjectsContext.CelestialObjectTypes.SingleOrDefaultAsync(x => x.Id == typeId);
+        }
+
         public IQueryable<CelestialObject> InitBaseGetQuery()
         {
             return _celestialObjectsContext.CelestialObjects.Include(x => x.Type).Include(x => x.DiscoverySource);
-        }
+        }        
     }
 }

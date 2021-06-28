@@ -32,9 +32,10 @@ namespace CelestialObjects.Web
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CelestialObjects.Web", Version = "v1" });
             });
 
-            services.AddDbContext<CelestialObjectsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CelestialObjectsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
             services.AddTransient<ICelestialObjectsRepository, CelestialObjectsRepository>();
+            services.AddTransient<IDiscoverySourceRepository, DiscoverySourceRepository>();
             services.AddTransient<ICelestialObjectsService, CelestialObjectsService>();
 
             services.AddScoped<ISchema, CelestialObjectsSchema>();
