@@ -10,7 +10,7 @@ namespace CelestialObjects.Data.Entities
 
         public DateTime EstablishmentDate { get; set; }
 
-        public virtual DiscoverySourceType Type { get; set; }
+        public DiscoverySourceType Type { get; set; }
 
         public int TypeId { get; set; }
 

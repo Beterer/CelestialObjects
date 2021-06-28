@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CelestialObjects.Data.Entities
+namespace CelestialObjects.Web.Models.Responses
 {
-    public class CelestialObject
+    public class CelestialObjecResponsetDto
     {
         public int Id { get; set; }
 
@@ -16,12 +16,8 @@ namespace CelestialObjects.Data.Entities
 
         public DateTime DiscoveryDate { get; set; }
 
-        public DiscoverySource DiscoverySource { get; set; }
-
         public int DiscoverySourceId { get; set; }
 
-        public CelestialObjectType Type { get; set; }
-        
-        public int TypeId { get; set; }
+        public string Type { get; set; }
     }
 }

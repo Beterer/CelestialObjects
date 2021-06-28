@@ -19,7 +19,7 @@ namespace CelestialObjects.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CelestialObjects.Data.CelestialObject", b =>
+            modelBuilder.Entity("CelestialObjects.Data.Entities.CelestialObject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +91,7 @@ namespace CelestialObjects.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CelestialObjects.Data.CelestialObjectType", b =>
+            modelBuilder.Entity("CelestialObjects.Data.Entities.CelestialObjectType", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -127,7 +127,7 @@ namespace CelestialObjects.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CelestialObjects.Data.DiscoverySource", b =>
+            modelBuilder.Entity("CelestialObjects.Data.Entities.DiscoverySource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,7 +171,7 @@ namespace CelestialObjects.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CelestialObjects.Data.DiscoverySourceType", b =>
+            modelBuilder.Entity("CelestialObjects.Data.Entities.DiscoverySourceType", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -207,15 +207,15 @@ namespace CelestialObjects.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CelestialObjects.Data.CelestialObject", b =>
+            modelBuilder.Entity("CelestialObjects.Data.Entities.CelestialObject", b =>
                 {
-                    b.HasOne("CelestialObjects.Data.DiscoverySource", "DiscoverySource")
+                    b.HasOne("CelestialObjects.Data.Entities.DiscoverySource", "DiscoverySource")
                         .WithMany()
                         .HasForeignKey("DiscoverySourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CelestialObjects.Data.CelestialObjectType", "Type")
+                    b.HasOne("CelestialObjects.Data.Entities.CelestialObjectType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -226,9 +226,9 @@ namespace CelestialObjects.Data.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("CelestialObjects.Data.DiscoverySource", b =>
+            modelBuilder.Entity("CelestialObjects.Data.Entities.DiscoverySource", b =>
                 {
-                    b.HasOne("CelestialObjects.Data.DiscoverySourceType", "Type")
+                    b.HasOne("CelestialObjects.Data.Entities.DiscoverySourceType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)

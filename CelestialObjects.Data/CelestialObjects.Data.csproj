@@ -17,8 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CelestialObjects.Domain\CelestialObjects.Domain.csproj" />
-  </ItemGroup>
-
 </Project>
