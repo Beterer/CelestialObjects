@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using CelestialObjects.Data.Services;
 using System.Linq;
 using CelestialObjects.Web.Extensions;
 using System;
 using CelestialObjects.Data.Entities;
+using CelestialObjects.Web.Services;
 
 namespace CelestialObjects.Web.Controllers
 {
@@ -14,19 +14,19 @@ namespace CelestialObjects.Web.Controllers
     public class CelestialObjectsController : ControllerBase
     {
         private readonly ILogger<CelestialObjectsController> _logger;
-        private readonly ICelestialObjectsRepository _celestialObjectsRepository;
+        private readonly ICelestialObjectsService _celestialObjectsService;
                 
         public CelestialObjectsController(ILogger<CelestialObjectsController> logger,
-            ICelestialObjectsRepository celestialObjectsRepository)
+            ICelestialObjectsService celestialObjectsService)
         {
             _logger = logger;
-            _celestialObjectsRepository = celestialObjectsRepository;
+            _celestialObjectsService = celestialObjectsService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var celestialObjects = await _celestialObjectsRepository.GetCelestialObjectsAsync();
+            var celestialObjects = await _celestialObjectsService.GetCelestialObjectsAsync();
             var result = celestialObjects.Select(x => x.ToDto());
 
             return Ok(result);
@@ -41,7 +41,7 @@ namespace CelestialObjects.Web.Controllers
 
             if (isTypeValid)
             {
-                var celestialObjects = await _celestialObjectsRepository.GetCelestialObjectsByTypeAsync((int)celestialObjectType);
+                var celestialObjects = await _celestialObjectsService.GetCelestialObjectsByTypeAsync((int)celestialObjectType);
                 var result = celestialObjects.Select(x => x.ToDto());
 
                 return Ok(result);

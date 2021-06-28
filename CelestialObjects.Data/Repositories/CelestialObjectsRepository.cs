@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CelestialObjects.Data.Services
+namespace CelestialObjects.Data.Repositories
 {
     public class CelestialObjectsRepository : ICelestialObjectsRepository
     {
@@ -18,12 +18,12 @@ namespace CelestialObjects.Data.Services
 
         public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsAsync()
         {
-            return await BaseGetQuery().ToListAsync();
+            return await InitBaseGetQuery().ToListAsync();
         }
 
         public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsByTypeAsync(int typeId)
         {
-            return await BaseGetQuery().
+            return await InitBaseGetQuery().
                 Where(x => x.TypeId == typeId).ToListAsync();
         }
 
@@ -34,18 +34,18 @@ namespace CelestialObjects.Data.Services
 
         public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsByCountryDiscoveredAsync(string countryName)
         {
-            return await BaseGetQuery().
+            return await InitBaseGetQuery().
                 Where(x => x.DiscoverySource.StateOwner == countryName).ToListAsync();
-        }
+        }      
         
-        public IQueryable<CelestialObject> BaseGetQuery()
-        {
-            return _celestialObjectsContext.CelestialObjects.Include(x => x.Type).Include(x => x.DiscoverySource);
-        }
-
         public async Task<IEnumerable<CelestialObjectType>> GetCelestialObjectTypes()
         {
             return await _celestialObjectsContext.CelestialObjectTypes.ToListAsync();
+        }
+
+        public IQueryable<CelestialObject> InitBaseGetQuery()
+        {
+            return _celestialObjectsContext.CelestialObjects.Include(x => x.Type).Include(x => x.DiscoverySource);
         }
     }
 }

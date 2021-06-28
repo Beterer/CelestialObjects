@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using CelestialObjects.Data.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CelestialObjects.Data.Entities;
 
-namespace CelestialObjects.Data.Services
+namespace CelestialObjects.Web.Services
 {
-    public interface ICelestialObjectsRepository
+    public interface ICelestialObjectsService
     {
         Task<IEnumerable<CelestialObject>> GetCelestialObjectsAsync();
 

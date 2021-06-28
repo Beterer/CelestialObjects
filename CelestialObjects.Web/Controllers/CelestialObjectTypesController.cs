@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using CelestialObjects.Data.Services;
 using System.Linq;
 using CelestialObjects.Web.Extensions;
+using CelestialObjects.Web.Services;
 
 namespace CelestialObjects.Web.Controllers
 {
@@ -12,19 +12,19 @@ namespace CelestialObjects.Web.Controllers
     public class CelestialObjectTypesController : ControllerBase
     {
         private readonly ILogger<CelestialObjectTypesController> _logger;
-        private readonly ICelestialObjectsRepository _celestialObjectsRepository;
-                
+        private readonly ICelestialObjectsService _celestialObjectsService;
+
         public CelestialObjectTypesController(ILogger<CelestialObjectTypesController> logger,
-            ICelestialObjectsRepository celestialObjectsRepository)
+            ICelestialObjectsService celestialObjectsService)
         {
             _logger = logger;
-            _celestialObjectsRepository = celestialObjectsRepository;
+            _celestialObjectsService = celestialObjectsService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var celestialObjects = await _celestialObjectsRepository.GetCelestialObjectTypes();
+            var celestialObjects = await _celestialObjectsService.GetCelestialObjectTypes();
             var result = celestialObjects.Select(x => x.ToDto());
 
             return Ok(result);

@@ -1,5 +1,6 @@
 using CelestialObjects.Data.Contexts;
-using CelestialObjects.Data.Services;
+using CelestialObjects.Data.Repositories;
+using CelestialObjects.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace CelestialObjects.Web
             services.AddDbContext<CelestialObjectsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<ICelestialObjectsRepository, CelestialObjectsRepository>();
+            services.AddTransient<ICelestialObjectsService, CelestialObjectsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
