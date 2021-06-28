@@ -21,10 +21,10 @@ namespace CelestialObjects.Data.Services
             return await BaseGetQuery().ToListAsync();
         }
 
-        public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsByTypeAsync(CelestialObjectTypeEnum type)
+        public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsByTypeAsync(int typeId)
         {
             return await BaseGetQuery().
-                Where(x => x.TypeId == (int)type).ToListAsync();
+                Where(x => x.TypeId == typeId).ToListAsync();
         }
 
         public async Task<CelestialObject> GetCelestialObjectsByNameAsync(string name)
@@ -41,6 +41,11 @@ namespace CelestialObjects.Data.Services
         public IQueryable<CelestialObject> BaseGetQuery()
         {
             return _celestialObjectsContext.CelestialObjects.Include(x => x.Type).Include(x => x.DiscoverySource);
+        }
+
+        public async Task<IEnumerable<CelestialObjectType>> GetCelestialObjectTypes()
+        {
+            return await _celestialObjectsContext.CelestialObjectTypes.ToListAsync();
         }
     }
 }

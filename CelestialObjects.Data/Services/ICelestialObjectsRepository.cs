@@ -8,10 +8,12 @@ namespace CelestialObjects.Data.Services
     {
         Task<IEnumerable<CelestialObject>> GetCelestialObjectsAsync();
 
-        Task<IEnumerable<CelestialObject>> GetCelestialObjectsByTypeAsync(CelestialObjectTypeEnum type);
+        Task<IEnumerable<CelestialObject>> GetCelestialObjectsByTypeAsync(int typeId);
 
         Task<CelestialObject> GetCelestialObjectsByNameAsync(string name);
 
         Task<IEnumerable<CelestialObject>> GetCelestialObjectsByCountryDiscoveredAsync(string countryName);
+
+        Task<IEnumerable<CelestialObjectType>> GetCelestialObjectTypes();
     }
 }

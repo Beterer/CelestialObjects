@@ -18,5 +18,15 @@ namespace CelestialObjects.Web.Extensions
                 Type = model.Type.Description
             };
         }
+
+        public static CelestialObjectTypeResponseDto ToDto(this Data.Entities.CelestialObjectType model)
+        {
+            return new CelestialObjectTypeResponseDto
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description
+            };
+        }
     }
 }
