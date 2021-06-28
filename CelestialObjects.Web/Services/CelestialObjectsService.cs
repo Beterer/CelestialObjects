@@ -8,11 +8,14 @@ namespace CelestialObjects.Web.Services
     public class CelestialObjectsService : ICelestialObjectsService
     {
         private readonly ICelestialObjectsRepository _celestialObjectsRepository;
+        private readonly IDiscoverySourceRepository _discoverySourceRepository;
 
-        public CelestialObjectsService(ICelestialObjectsRepository celestialObjectsRepository)
+        public CelestialObjectsService(ICelestialObjectsRepository celestialObjectsRepository,
+            IDiscoverySourceRepository discoverySourceRepository)
         {
             _celestialObjectsRepository = celestialObjectsRepository;
-        }
+            _discoverySourceRepository = discoverySourceRepository;
+        }        
 
         public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsAsync()
         {
@@ -37,6 +40,21 @@ namespace CelestialObjects.Web.Services
         public async Task<IEnumerable<CelestialObjectType>> GetCelestialObjectTypes()
         {
             return await _celestialObjectsRepository.GetCelestialObjectTypes();
+        }
+
+        public async Task<CelestialObjectType> GetTypeByIdAsync(int typeId)
+        {
+            return await _celestialObjectsRepository.GetTypeByIdAsync(typeId);
+        }
+
+        public async Task<DiscoverySource> GetDiscoverySourceByIdAsync(int id)
+        {
+            return await _discoverySourceRepository.GetByIdAsync(id);
+        }
+
+        public async Task<IEnumerable<DiscoverySource>> GetDiscoverySourcesAsync()
+        {
+            return await _discoverySourceRepository.GetAll();
         }
     }
 }

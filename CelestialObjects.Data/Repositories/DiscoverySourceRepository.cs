@@ -1,6 +1,7 @@
 ﻿using CelestialObjects.Data.Contexts;
 using CelestialObjects.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CelestialObjects.Data.Repositories
@@ -14,9 +15,14 @@ namespace CelestialObjects.Data.Repositories
             _celestialObjectsContext = celestialObjectsContext;
         }
 
+        public async Task<IEnumerable<DiscoverySource>> GetAll()
+        {
+            return await _celestialObjectsContext.DiscoverySources.ToListAsync();
+        }
+
         public async Task<DiscoverySource> GetByIdAsync(int id)
         {
             return await _celestialObjectsContext.DiscoverySources.SingleOrDefaultAsync(x => x.Id == id);
-        }
+        }        
     }
 }

@@ -15,5 +15,11 @@ namespace CelestialObjects.Web.Services
         Task<IEnumerable<CelestialObject>> GetCelestialObjectsByCountryDiscoveredAsync(string countryName);
 
         Task<IEnumerable<CelestialObjectType>> GetCelestialObjectTypes();
+
+        Task<CelestialObjectType> GetTypeByIdAsync(int typeId);
+
+        Task<DiscoverySource> GetDiscoverySourceByIdAsync(int id);
+
+        Task<IEnumerable<DiscoverySource>> GetDiscoverySourcesAsync();
     }
 }

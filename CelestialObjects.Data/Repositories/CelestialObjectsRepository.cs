@@ -35,7 +35,7 @@ namespace CelestialObjects.Data.Repositories
         public async Task<IEnumerable<CelestialObject>> GetByCountryDiscoveredAsync(string countryName)
         {
             return await InitBaseGetQuery().
-                Where(x => x.DiscoverySource.StateOwner == countryName).ToListAsync();
+                Where(x => x.DiscoverySource.StateOwner.ToLower() == countryName.ToLower().Trim()).ToListAsync();
         }      
         
         public async Task<IEnumerable<CelestialObjectType>> GetCelestialObjectTypes()
