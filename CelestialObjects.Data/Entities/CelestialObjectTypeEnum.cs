@@ -9,6 +9,8 @@ namespace CelestialObjects.Data.Entities
         [Description("Star")]
         Star = 2,
         [Description("Black Hole")]
-        BlackHole = 3
+        BlackHole = 3,
+        [Description("Undetermined")]
+        Undetermined = 4
     }
 }

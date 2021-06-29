@@ -1,6 +1,8 @@
 using CelestialObjects.Data.Contexts;
 using CelestialObjects.Data.Repositories;
+using CelestialObjects.Web.GraphQL;
 using CelestialObjects.Web.Services;
+using GraphQL.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using GraphQL.Types;
 
 namespace CelestialObjects.Web
 {
@@ -29,10 +32,22 @@ namespace CelestialObjects.Web
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CelestialObjects.Web", Version = "v1" });
             });
 
-            services.AddDbContext<CelestialObjectsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CelestialObjectsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
             services.AddTransient<ICelestialObjectsRepository, CelestialObjectsRepository>();
+            services.AddTransient<IDiscoverySourceRepository, DiscoverySourceRepository>();
             services.AddTransient<ICelestialObjectsService, CelestialObjectsService>();
+            services.AddTransient<ICelestialObjectFactory, CelestialObjectFactory>();
+
+            services.AddScoped<ISchema, CelestialObjectsSchema>();
+
+            services.AddGraphQL(options =>
+            {
+                options.EnableMetrics = true;
+            })
+            .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
+            .AddSystemTextJson()
+            .AddGraphTypes(ServiceLifetime.Scoped);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +70,9 @@ namespace CelestialObjects.Web
             {
                 endpoints.MapControllers();
             });
+
+            app.UseGraphQL<ISchema>();
+            app.UseGraphQLPlayground();
         }
     }
 }
