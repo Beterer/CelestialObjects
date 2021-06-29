@@ -37,6 +37,7 @@ namespace CelestialObjects.Web
             services.AddTransient<ICelestialObjectsRepository, CelestialObjectsRepository>();
             services.AddTransient<IDiscoverySourceRepository, DiscoverySourceRepository>();
             services.AddTransient<ICelestialObjectsService, CelestialObjectsService>();
+            services.AddTransient<ICelestialObjectFactory, CelestialObjectFactory>();
 
             services.AddScoped<ISchema, CelestialObjectsSchema>();
 

@@ -10,12 +10,15 @@ namespace CelestialObjects.Web.Services
     {
         private readonly ICelestialObjectsRepository _celestialObjectsRepository;
         private readonly IDiscoverySourceRepository _discoverySourceRepository;
+        private readonly ICelestialObjectFactory _celestialObjectFactory;
 
         public CelestialObjectsService(ICelestialObjectsRepository celestialObjectsRepository,
-            IDiscoverySourceRepository discoverySourceRepository)
+            IDiscoverySourceRepository discoverySourceRepository,
+            ICelestialObjectFactory celestialObjectFactory)
         {
             _celestialObjectsRepository = celestialObjectsRepository;
             _discoverySourceRepository = discoverySourceRepository;
+            _celestialObjectFactory = celestialObjectFactory;
         }        
 
         public async Task<IEnumerable<CelestialObject>> GetCelestialObjectsAsync()
@@ -60,18 +63,9 @@ namespace CelestialObjects.Web.Services
 
         public async Task<CelestialObject> AddCelestialObject(CelestialObjectRequestDto celestialObjectInput)
         {
-            var celestialObject = new CelestialObject
-            {
-                Name = celestialObjectInput.Name,
-                Mass = celestialObjectInput.Mass,
-                EquatorialDiameter = celestialObjectInput.EquatorialDiameter,
-                SurfaceTemperature = celestialObjectInput.SurfaceTemperature,
-                DiscoveryDate = celestialObjectInput.DiscoveryDate,
-                DiscoverySourceId = celestialObjectInput.DiscoverySourceId,
-                TypeId = 2
-            };
+            var celestialObjectToAdd = _celestialObjectFactory.BuildCelestialObject(celestialObjectInput);
 
-            return await _celestialObjectsRepository.AddAsync(celestialObject);
+            return await _celestialObjectsRepository.AddAsync(celestialObjectToAdd);
         }
     }
 }

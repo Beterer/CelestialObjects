@@ -27,7 +27,7 @@ namespace CelestialObjects.Data.Contexts
         private void SeedData(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CelestialObjectType>().HasData(
-                CelestialObjectTypeEnum.Planet, CelestialObjectTypeEnum.Star, CelestialObjectTypeEnum.BlackHole);
+                CelestialObjectTypeEnum.Planet, CelestialObjectTypeEnum.Star, CelestialObjectTypeEnum.BlackHole, CelestialObjectTypeEnum.Undetermined);
             modelBuilder.Entity<DiscoverySourceType>().HasData(
                DiscoverySourceTypeEnum.GroundTelescope, DiscoverySourceTypeEnum.SpaceTelescope, DiscoverySourceTypeEnum.Other);
 
