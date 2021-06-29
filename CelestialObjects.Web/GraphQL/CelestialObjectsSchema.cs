@@ -10,6 +10,7 @@ namespace CelestialObjects.Web.GraphQL
         public CelestialObjectsSchema(IServiceProvider provider) : base(provider)
         {
             Query = provider.GetRequiredService<CelestialObjectsQuery>();
+            Mutation = provider.GetRequiredService<CelestialObjectMutation>();
         }
     }
 }

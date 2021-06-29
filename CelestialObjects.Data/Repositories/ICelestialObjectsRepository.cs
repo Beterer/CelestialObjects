@@ -17,5 +17,7 @@ namespace CelestialObjects.Data.Repositories
         Task<IEnumerable<CelestialObjectType>> GetCelestialObjectTypes();
 
         Task<CelestialObjectType> GetTypeByIdAsync(int typeId);
+
+        Task<CelestialObject> AddAsync(CelestialObject celestialObject);
     }
 }

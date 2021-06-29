@@ -39,7 +39,6 @@ namespace CelestialObjects.Web.GraphQL
                     var typeName = context.GetArgument<string>("type");
                     CelestialObjectTypeEnum celestialObjectType;
                     var isTypeValid = Enum.TryParse(typeName, ignoreCase: true, out celestialObjectType);
-                    //TODO: add check if it is not valid type?
 
                     return celestialObjectsService.GetCelestialObjectsByTypeAsync((int)celestialObjectType);
                 });

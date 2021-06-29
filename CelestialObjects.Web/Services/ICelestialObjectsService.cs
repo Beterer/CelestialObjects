@@ -1,4 +1,5 @@
 ﻿using CelestialObjects.Data.Entities;
+using CelestialObjects.Web.Models.Requests;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,5 +22,7 @@ namespace CelestialObjects.Web.Services
         Task<DiscoverySource> GetDiscoverySourceByIdAsync(int id);
 
         Task<IEnumerable<DiscoverySource>> GetDiscoverySourcesAsync();
+        
+        Task<CelestialObject> AddCelestialObject(CelestialObjectRequestDto celestialObjectInput);
     }
 }

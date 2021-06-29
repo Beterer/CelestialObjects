@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CelestialObjects.Data.Entities;
 using CelestialObjects.Data.Repositories;
+using CelestialObjects.Web.Models.Requests;
 
 namespace CelestialObjects.Web.Services
 {
@@ -55,6 +56,22 @@ namespace CelestialObjects.Web.Services
         public async Task<IEnumerable<DiscoverySource>> GetDiscoverySourcesAsync()
         {
             return await _discoverySourceRepository.GetAll();
+        }
+
+        public async Task<CelestialObject> AddCelestialObject(CelestialObjectRequestDto celestialObjectInput)
+        {
+            var celestialObject = new CelestialObject
+            {
+                Name = celestialObjectInput.Name,
+                Mass = celestialObjectInput.Mass,
+                EquatorialDiameter = celestialObjectInput.EquatorialDiameter,
+                SurfaceTemperature = celestialObjectInput.SurfaceTemperature,
+                DiscoveryDate = celestialObjectInput.DiscoveryDate,
+                DiscoverySourceId = celestialObjectInput.DiscoverySourceId,
+                TypeId = 2
+            };
+
+            return await _celestialObjectsRepository.AddAsync(celestialObject);
         }
     }
 }

@@ -48,6 +48,14 @@ namespace CelestialObjects.Data.Repositories
             return await _celestialObjectsContext.CelestialObjectTypes.SingleOrDefaultAsync(x => x.Id == typeId);
         }
 
+        public async Task<CelestialObject> AddAsync(CelestialObject celestialObject)
+        {
+            _celestialObjectsContext.CelestialObjects.Add(celestialObject);
+            await _celestialObjectsContext.SaveChangesAsync();
+
+            return celestialObject;
+        }
+
         public IQueryable<CelestialObject> InitBaseGetQuery()
         {
             return _celestialObjectsContext.CelestialObjects.Include(x => x.Type).Include(x => x.DiscoverySource);

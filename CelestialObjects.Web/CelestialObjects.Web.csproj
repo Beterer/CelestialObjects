@@ -22,8 +22,4 @@
     <ProjectReference Include="..\CelestialObjects.Data\CelestialObjects.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Requests\" />
-  </ItemGroup>
-
 </Project>
