@@ -1,5 +1,7 @@
 # CelestialObjects
 
+The solution exposes an API via GrapQL to see and add celestial objects.
+
 **1. Setup**
 
   - update `appsettings.json` with your connection string
