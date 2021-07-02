@@ -14,6 +14,7 @@ User GraphQL intellisense to generate query
 
 Available operations with examples:
  - GET: 
+ 
  -celestialObjects
  `{
   celestialObjects {
@@ -51,7 +52,7 @@ Available operations with examples:
   }
 }`
 
-	-celestialObjectsByType
+-celestialObjectsByType
 `{
   celestialObjectsByType(type: "Star"){
     name
@@ -59,7 +60,7 @@ Available operations with examples:
   }
 }`
 
-	-celestialObjectsByDiscoveryCountry
+-celestialObjectsByDiscoveryCountry
 `	{
   celestialObjectsByDiscoveryCountry(country: "USA") {
     name
@@ -69,7 +70,8 @@ Available operations with examples:
 
  - POST: 
  -addCelestialObject
- 		query
+ 
+query:
 `mutation($celestialObjectInput: celestialObjectInput!) {
   addCelestialObject(celestialObjectInput: $celestialObjectInput) {
     name
@@ -86,7 +88,8 @@ Available operations with examples:
     }
   }
 }`
-		payload
+
+payload:
 `		{
   "celestialObjectInput":
   {
