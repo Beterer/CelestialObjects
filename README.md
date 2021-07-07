@@ -10,7 +10,8 @@ The solution exposes an API via GrapQL to see and add celestial objects.
   - run solution
   
 **2. Usage**
-User GraphQL intellisense to generate query
+
+Use GraphQL intellisense to generate query
 
 ![1](https://user-images.githubusercontent.com/11473343/123823114-9141bb00-d905-11eb-9760-5464b37b460f.jpg)
 
