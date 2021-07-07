@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelestialObjects.Web", "Cel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CelestialObjects.Data", "CelestialObjects.Data\CelestialObjects.Data.csproj", "{DA19A859-9206-40FC-92DD-DB621B058DB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelestialObjects.Web.UnitTests", "CelestialObjects.Web.UnitTests\CelestialObjects.Web.UnitTests.csproj", "{9C19235C-6E33-4104-AA6F-3C1BAC7FAE79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DA19A859-9206-40FC-92DD-DB621B058DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA19A859-9206-40FC-92DD-DB621B058DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA19A859-9206-40FC-92DD-DB621B058DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C19235C-6E33-4104-AA6F-3C1BAC7FAE79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C19235C-6E33-4104-AA6F-3C1BAC7FAE79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C19235C-6E33-4104-AA6F-3C1BAC7FAE79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C19235C-6E33-4104-AA6F-3C1BAC7FAE79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

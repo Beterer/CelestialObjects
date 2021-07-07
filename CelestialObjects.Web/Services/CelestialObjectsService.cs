@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CelestialObjects.Data.Entities;
 using CelestialObjects.Data.Repositories;
+using CelestialObjects.Web.Cataloging;
 using CelestialObjects.Web.Models.Requests;
 
 namespace CelestialObjects.Web.Services

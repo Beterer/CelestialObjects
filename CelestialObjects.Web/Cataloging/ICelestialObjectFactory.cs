@@ -1,7 +1,7 @@
 ﻿using CelestialObjects.Data.Entities;
 using CelestialObjects.Web.Models.Requests;
 
-namespace CelestialObjects.Web
+namespace CelestialObjects.Web.Cataloging
 {
     public interface ICelestialObjectFactory
     {
