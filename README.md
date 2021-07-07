@@ -104,5 +104,7 @@ payload:
   }
 }`
 
+**3. Adding new Celestial Object Types**
 
-
+Supported types: 'Planet', 'Star', 'Black Hole'
+To check for a new type, for example 'Pulsar', a new `PulsarRule` must be added to `CelestialObjects.Web.Cataloging/Rule` and reflection will take care of the rest.
