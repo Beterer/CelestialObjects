@@ -12,7 +12,7 @@ namespace CelestialObjects.Web.Cataloging.Rules
 
         public bool RuleIsMet(CelestialObjectRequestDto celestialObjectInfo)
         {
-            // Lol
+            // This needs more clarifications from business :D
             return new Random().Next(1, 3) == 3;
         }
     }
